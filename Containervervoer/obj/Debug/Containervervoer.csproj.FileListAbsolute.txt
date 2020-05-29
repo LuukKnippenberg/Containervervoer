@@ -1,0 +1,10 @@
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\bin\Debug\Containervervoer.exe.config
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\bin\Debug\Containervervoer.exe
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\bin\Debug\Containervervoer.pdb
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.csprojAssemblyReference.cache
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.Form1.resources
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.Properties.Resources.resources
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.csproj.GenerateResource.cache
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.csproj.CoreCompileInputs.cache
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.exe
+C:\Users\luuk_\source\repos\Containervervoer\Containervervoer\obj\Debug\Containervervoer.pdb
