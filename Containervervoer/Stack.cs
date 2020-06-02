@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,28 @@ namespace Containervervoer
         }
         public int maxWeight = 120; //Ton
         public int currentWeight { get; private set; }
+        public bool isFull { get; private set; } = false;
         public Stack()
         {
 
         }
 
-        public void TryToAddContainerToStack(Container container)
+        public bool TryToAddContainerToStack(Container container)
         {
-            containerList.Add(container);
+            if((currentWeight + container.Weight) <= maxWeight)
+            {
+                containerList.Add(container);
+                currentWeight += container.Weight;
+
+                if((currentWeight + container.minWeight) >= maxWeight)
+                {
+                    isFull = true;
+                }
+
+                return true;
+            }
+            
+            return false;
         }
     }
 }

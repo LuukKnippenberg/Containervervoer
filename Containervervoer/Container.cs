@@ -10,7 +10,7 @@ namespace Containervervoer
     {
         public int Weight { get; private set; } //In Tons
         private int maxWeight = 30;
-        private int minWeight = 4;
+        public int minWeight { get; private set; } = 4;
 
         /*
         enum Type

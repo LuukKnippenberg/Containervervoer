@@ -45,14 +45,33 @@ namespace Containervervoer
             ResetRowList();
             if (rowList.Count == 0)
             {
-                rowList.Add(new Row());
+                rowList.Add(new Row(Width));
             }
+
+            //Debug.WriteLine("rowList Count: " + rowList.Count);
 
             for (int i = 0; i < containerList.Count; i++)
             {
                 for (int x = 0; x < rowList.Count; x++)
                 {
-                    rowList[x].TryToAddContainer(containerList[i]);
+                    if (rowList[x].TryToAddContainer(containerList[i]))
+                    {
+                        
+                    }
+                    else
+                    {
+                        Debug.WriteLine((rowList.Count - 1) + " " + x);
+                        if (x < (rowList.Count))
+                        {
+                            
+                            if (rowList.Count < Length)
+                            {
+                                rowList.Add(new Row(Width));
+                                rowList[(rowList.Count - 1)].TryToAddContainer(containerList[i]);
+                                
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -65,10 +84,16 @@ namespace Containervervoer
         public void OpenContainerVisualizer()
         {
             string stack = "";
+            string weight = "";
             for (int z = 0; z < rowList.Count; z++)
             {
                 //Length / Depth
                 Debug.WriteLine(z);
+                if(z > 0)
+                {
+                    stack += '/';
+                }
+
 
                 for (int x = 0; x < rowList[z].stackListReadable.Count; x++)
                 {
@@ -84,6 +109,7 @@ namespace Containervervoer
                         //Height
                         Debug.WriteLine(y);
                         stack += '1';
+                        
                     }
                 }
             }
