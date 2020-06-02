@@ -11,21 +11,49 @@ namespace Containervervoer
         public int Weight { get; private set; } //In Tons
         private int maxWeight = 30;
         public int minWeight { get; private set; } = 4;
+        public int Type { get; private set; }
 
-        /*
-        enum Type
+        enum ContainerTypes
         {
-            Normal,
+            Normal = 1,
             Valuable,
             Coolable,
             CoolableValuable
         }
-        */
 
         public Container(int weight, int type)
         {
-            //Type = type;
             Weight = SetWeigth(weight);
+            Type = Convert.ToInt32(SetContainerType(type));
+        }
+
+        private ContainerTypes SetContainerType(int type)
+        {
+            ContainerTypes currentType = ContainerTypes.Normal; //Defaults to normal
+
+            if(type == 1)
+            {
+                currentType = ContainerTypes.Normal;
+            }
+            else if (type == 2)
+            {
+                currentType = ContainerTypes.Valuable;
+            }
+            else if (type == 3)
+            {
+                currentType = ContainerTypes.Coolable;
+            }
+            else if (type == 4)
+            {
+                currentType = ContainerTypes.CoolableValuable;
+            }
+            else
+            {
+                //Throw exception
+                
+            }
+
+            return currentType;
         }
 
         public int SetWeigth(int weight)

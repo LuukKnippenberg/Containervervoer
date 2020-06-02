@@ -26,6 +26,8 @@ namespace Containervervoer
         public int MaxWeigth { get; private set; }
         public int MinWeigth { get; private set; }
 
+        private Random rnd = new Random();
+
         public Ship(int length, int width)
         {
             Length = length;
@@ -36,7 +38,7 @@ namespace Containervervoer
 
         public void AddContainerToShip()
         {
-            containerList.Add(new Container(30, 0));
+            containerList.Add(new Container(30, rnd.Next(1,5)));
             DistrubuteContainers();
         }
 
@@ -60,14 +62,19 @@ namespace Containervervoer
                     }
                     else
                     {
-                        Debug.WriteLine((rowList.Count - 1) + " " + x);
+                        //Debug.WriteLine((rowList.Count - 1) + " " + x);
                         if (x < (rowList.Count))
                         {
-                            
+                            Debug.WriteLine("Length: " + Length + "rowList.count: " + rowList.Count);
                             if (rowList.Count < Length)
                             {
                                 rowList.Add(new Row(Width));
-                                rowList[(rowList.Count - 1)].TryToAddContainer(containerList[i]);
+                                
+                                if(rowList[(rowList.Count - 1)].TryToAddContainer(containerList[i]))
+                                {
+                                    
+                                }
+                                
                                 
                             }
                         }
@@ -92,6 +99,7 @@ namespace Containervervoer
                 if(z > 0)
                 {
                     stack += '/';
+                    weight += '/';
                 }
 
 
@@ -102,18 +110,27 @@ namespace Containervervoer
                     if(x > 0)
                     {
                         stack += ',';
+                        weight += ',';
                     }
 
                     for (int y = 0; y < rowList[z].stackListReadable[x].containerListReadable.Count; y++)
                     {
+                        Container container = rowList[z].stackListReadable[x].containerListReadable[y];
+
                         //Height
-                        Debug.WriteLine(y);
-                        stack += '1';
+                        //Debug.WriteLine(y);
+                        
+                        stack += Convert.ToString(container.Type);
+                        weight += "30";
+                        if(y < (rowList[z].stackListReadable[x].containerListReadable.Count - 1))
+                        {
+                            weight += "-";
+                        }
                         
                     }
                 }
             }
-            System.Diagnostics.Process.Start("https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"");
+            System.Diagnostics.Process.Start("https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"&weights="+ weight+"");
         }
     }
 }

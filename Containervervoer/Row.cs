@@ -44,7 +44,7 @@ namespace Containervervoer
                             stackList.Add(new Stack());
                             if(stackList[(stackList.Count - 1)].TryToAddContainerToStack(container))
                             {
-                                Debug.WriteLine("stackList.Count: " + stackList.Count + " Width: " + Width);
+                                //Debug.WriteLine("stackList.Count: " + stackList.Count + " Width: " + Width);
                                 return true;
                             }
                             
