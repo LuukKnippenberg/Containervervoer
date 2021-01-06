@@ -36,9 +36,9 @@ namespace Containervervoer
             MinWeigth = MaxWeigth / 2;
         }
 
-        public void AddContainerToShip()
+        public void AddContainerToShip(int weight, int type)
         {
-            containerList.Add(new Container(30, rnd.Next(1,5)));
+            containerList.Add(new Container(30, type));
             DistrubuteContainers();
         }
 
@@ -65,7 +65,6 @@ namespace Containervervoer
                         //Debug.WriteLine((rowList.Count - 1) + " " + x);
                         if (x < (rowList.Count))
                         {
-                            Debug.WriteLine("Length: " + Length + "rowList.count: " + rowList.Count);
                             if (rowList.Count < Length)
                             {
                                 rowList.Add(new Row(Width));
@@ -130,7 +129,7 @@ namespace Containervervoer
                     }
                 }
             }
-            System.Diagnostics.Process.Start("https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"&weights="+ weight+"");
+            Process.Start("https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"&weights="+ weight+"");
         }
     }
 }

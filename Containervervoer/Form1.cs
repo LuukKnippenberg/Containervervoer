@@ -13,41 +13,57 @@ namespace Containervervoer
     public partial class Form1 : Form
     {
         Ship ship;
+        private List<string[]> tempContainers = new List<string[]>();
         public Form1()
         {
             InitializeComponent();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value));
-            
-        }
-
-        private void lblAmount_Click(object sender, EventArgs e)
-        {
+            cbType.DataSource = new ComboItem[]
+            {
+                new ComboItem{ ID = 0, Text = "Normal" },
+                new ComboItem{ ID = 0, Text = "Valuable" },
+                new ComboItem{ ID = 0, Text = "Cooled" },
+                new ComboItem{ ID = 0, Text = "Cooled Valuable" }
+            };
 
         }
 
-        private void nupAmount_ValueChanged(object sender, EventArgs e)
+        class ComboItem
         {
-
+            public int ID { get; set; }
+            public string Text { get; set; }
         }
 
         private void btnAddContainer_Click(object sender, EventArgs e)
         {
-            if(ship != null)
+            string comboItem = $"Weigth: {nupWeight.Value.ToString()} Type: {cbType.SelectedIndex} ";
+            for (int i = 0; i < nupAmount.Value; i++)
             {
-                ship.AddContainerToShip();
+                //ship.AddContainerToShip(Convert.ToInt32(nupWeight.Value), (cbType.SelectedIndex + 1));
+                lvContainers.Items.Add(comboItem);
+                string[] tempContainer = { nupWeight.Value.ToString(), (cbType.SelectedIndex + 1).ToString() };
+                tempContainers.Add(tempContainer);
             }
         }
 
         private void btnVisualize_Click(object sender, EventArgs e)
         {
-            if (ship != null)
+            if (ship == null)
             {
-                ship.OpenContainerVisualizer();
+                ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value));
             }
+
+            foreach (var item in tempContainers)
+            {
+                ship.AddContainerToShip(Convert.ToInt32(item[0]), Convert.ToInt32(item[1]));
+            }
+
+            ship.OpenContainerVisualizer();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            tempContainers.Clear();
         }
     }
 }
