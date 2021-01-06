@@ -48,10 +48,7 @@ namespace Containervervoer
 
         private void btnVisualize_Click(object sender, EventArgs e)
         {
-            if (ship == null)
-            {
-                ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value));
-            }
+            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value));
 
             foreach (var item in tempContainers)
             {
@@ -63,6 +60,7 @@ namespace Containervervoer
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            lvContainers.Clear();
             tempContainers.Clear();
         }
     }

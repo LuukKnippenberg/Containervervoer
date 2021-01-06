@@ -20,6 +20,8 @@ namespace Containervervoer
             get { return containerList.AsReadOnly(); }
         }
 
+        private List<Container> SortedList = new List<Container>();
+
         private List<Row> rowList = new List<Row>();
         public int Length { get; private set; }
         public int Width { get; private set; }
@@ -44,19 +46,28 @@ namespace Containervervoer
 
         private void DistrubuteContainers()
         {
+
+            //Distribution order:
+            //1 - Coolable Valuable
+            //2 - Coolable
+            //3 - Valuable
+            //4 - regular
+
             ResetRowList();
             if (rowList.Count == 0)
             {
                 rowList.Add(new Row(Width));
             }
 
+            SortedList = containerList.OrderByDescending(o => o.Type).ToList();
+
             //Debug.WriteLine("rowList Count: " + rowList.Count);
 
-            for (int i = 0; i < containerList.Count; i++)
+            for (int i = 0; i < SortedList.Count; i++)
             {
                 for (int x = 0; x < rowList.Count; x++)
                 {
-                    if (rowList[x].TryToAddContainer(containerList[i]))
+                    if (rowList[x].TryToAddContainer(SortedList[i]))
                     {
                         
                     }
@@ -69,7 +80,7 @@ namespace Containervervoer
                             {
                                 rowList.Add(new Row(Width));
                                 
-                                if(rowList[(rowList.Count - 1)].TryToAddContainer(containerList[i]))
+                                if(rowList[(rowList.Count - 1)].TryToAddContainer(SortedList[i]))
                                 {
                                     
                                 }
@@ -94,7 +105,7 @@ namespace Containervervoer
             for (int z = 0; z < rowList.Count; z++)
             {
                 //Length / Depth
-                Debug.WriteLine(z);
+                Debug.WriteLine(z + " z");
                 if(z > 0)
                 {
                     stack += '/';
@@ -105,7 +116,7 @@ namespace Containervervoer
                 for (int x = 0; x < rowList[z].stackListReadable.Count; x++)
                 {
                     //Width 
-                    Debug.WriteLine(x);
+                    Debug.WriteLine(x + " x");
                     if(x > 0)
                     {
                         stack += ',';
@@ -117,7 +128,7 @@ namespace Containervervoer
                         Container container = rowList[z].stackListReadable[x].containerListReadable[y];
 
                         //Height
-                        //Debug.WriteLine(y);
+                        Debug.WriteLine(y + " y");
                         
                         stack += Convert.ToString(container.Type);
                         weight += "30";

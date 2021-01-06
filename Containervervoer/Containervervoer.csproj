@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container.cs" />
+    <Compile Include="Container\Container.cs" />
+    <Compile Include="Container\Cooled.cs" />
+    <Compile Include="Container\CooledValuable.cs" />
+    <Compile Include="Container\Valuable.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

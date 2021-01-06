@@ -16,9 +16,9 @@ namespace Containervervoer
         enum ContainerTypes
         {
             Normal = 1,
-            Valuable,
-            Coolable,
-            CoolableValuable
+            Valuable = 2,
+            Coolable = 3,
+            CoolableValuable = 4
         }
 
         public Container(int weight, int type)

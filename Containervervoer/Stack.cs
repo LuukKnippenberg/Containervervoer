@@ -25,6 +25,28 @@ namespace Containervervoer
 
         public bool TryToAddContainerToStack(Container container)
         {
+            switch (container.Type)
+            {
+                case 0:
+                    
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    TryToAddContainerToStack(container);
+                    break;
+                default:
+                    break;
+            }
+
+            if(container.Type == 3 || container.Type == 2)
+            {
+                
+            }
             if((currentWeight + container.Weight) <= maxWeight)
             {
                 containerList.Add(container);
@@ -40,5 +62,11 @@ namespace Containervervoer
             
             return false;
         }
-    }
+        public bool CheckIfFrontRow(Container container)
+        {
+            
+
+            return false;
+        }
+    }    
 }
