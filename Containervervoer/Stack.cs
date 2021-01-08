@@ -15,7 +15,7 @@ namespace Containervervoer
         {
             get { return ContainerList.AsReadOnly(); }
         }
-        public int MaxWeight = 120; //Ton
+        public int MaxWeight = 150; //Ton
         public int CurrentWeight { get; private set; }
         public bool IsFull { get; private set; } = false;
         public bool Reserved { get; private set; } = false;
@@ -33,8 +33,6 @@ namespace Containervervoer
                 return false;
             }
 
-
-
             if (container.Coolable && Position > 0)
             {
                 return false;
@@ -47,12 +45,14 @@ namespace Containervervoer
                     if(ContainerList.Count == 0)
                     {
                         ContainerList.Add(container);
+                        
                     }
                     else
                     {
                         if (!ContainerList[(ContainerList.Count - 1)].Valuable)
                         {
                             ContainerList.Add(container);
+                            
                         }
                         else
                         {

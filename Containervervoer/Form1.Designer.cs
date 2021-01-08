@@ -30,10 +30,10 @@ namespace Containervervoer
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblLength = new System.Windows.Forms.Label();
+            this.lblWidth = new System.Windows.Forms.Label();
             this.nupLength = new System.Windows.Forms.NumericUpDown();
             this.nupWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblWidth = new System.Windows.Forms.Label();
+            this.lblLength = new System.Windows.Forms.Label();
             this.btnAddContainer = new System.Windows.Forms.Button();
             this.nupWeight = new System.Windows.Forms.NumericUpDown();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -57,14 +57,14 @@ namespace Containervervoer
             this.gbControls.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblLength
+            // lblWidth
             // 
-            this.lblLength.AutoSize = true;
-            this.lblLength.Location = new System.Drawing.Point(17, 29);
-            this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(40, 13);
-            this.lblLength.TabIndex = 2;
-            this.lblLength.Text = "Length";
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Location = new System.Drawing.Point(17, 29);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(35, 13);
+            this.lblWidth.TabIndex = 2;
+            this.lblWidth.Text = "Width";
             // 
             // nupLength
             // 
@@ -100,14 +100,14 @@ namespace Containervervoer
             0,
             0});
             // 
-            // lblWidth
+            // lblLength
             // 
-            this.lblWidth.AutoSize = true;
-            this.lblWidth.Location = new System.Drawing.Point(81, 29);
-            this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(35, 13);
-            this.lblWidth.TabIndex = 4;
-            this.lblWidth.Text = "Width";
+            this.lblLength.AutoSize = true;
+            this.lblLength.Location = new System.Drawing.Point(81, 29);
+            this.lblLength.Name = "lblLength";
+            this.lblLength.Size = new System.Drawing.Size(40, 13);
+            this.lblLength.TabIndex = 4;
+            this.lblLength.Text = "Length";
             // 
             // btnAddContainer
             // 
@@ -152,9 +152,9 @@ namespace Containervervoer
             // 
             // gbBoatControls
             // 
-            this.gbBoatControls.Controls.Add(this.lblLength);
-            this.gbBoatControls.Controls.Add(this.nupLength);
             this.gbBoatControls.Controls.Add(this.lblWidth);
+            this.gbBoatControls.Controls.Add(this.nupLength);
+            this.gbBoatControls.Controls.Add(this.lblLength);
             this.gbBoatControls.Controls.Add(this.nupWidth);
             this.gbBoatControls.Location = new System.Drawing.Point(12, 12);
             this.gbBoatControls.Name = "gbBoatControls";
@@ -304,10 +304,10 @@ namespace Containervervoer
         }
 
         #endregion
-        private System.Windows.Forms.Label lblLength;
+        private System.Windows.Forms.Label lblWidth;
         private System.Windows.Forms.NumericUpDown nupLength;
         private System.Windows.Forms.NumericUpDown nupWidth;
-        private System.Windows.Forms.Label lblWidth;
+        private System.Windows.Forms.Label lblLength;
         private System.Windows.Forms.NumericUpDown nupWeight;
         private System.Windows.Forms.Label lblWeight;
         private System.Windows.Forms.GroupBox gbBoatControls;

@@ -30,7 +30,7 @@ namespace Containervervoer
                 {
                     if (container.Valuable)
                     {
-                        if (StackList[i + 1] != null)
+                        if((i+1) < (StackList.Count))
                         {
                             StackList[i + 1].SetReserved();
                         }
@@ -42,7 +42,6 @@ namespace Containervervoer
                 {
                     if (container.Coolable) 
                     {
-                        //Debug.WriteLine("stackList.Count: " + stackList.Count + " Width: " + Width);
                         return false;
                     }
                     
@@ -51,7 +50,6 @@ namespace Containervervoer
 
             return false;
         }
-
 
         private List<Stack> InitializeStackList()
         {

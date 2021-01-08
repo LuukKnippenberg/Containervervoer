@@ -14,97 +14,103 @@ namespace Containervervoer
 {
     class Ship
     {
-        private List<Container> containerList = new List<Container>();
-        public ReadOnlyCollection<Container> containerListRead
+        private List<Container> ContainerList = new List<Container>();
+        public ReadOnlyCollection<Container> ContainerListRead
         {
-            get { return containerList.AsReadOnly(); }
+            get { return ContainerList.AsReadOnly(); }
         }
 
         private List<Container> SortedList = new List<Container>();
 
-        private List<Row> rowList = new List<Row>();
-        public int Length { get; private set; }
+        private List<Row> RowList = new List<Row>();
         public int Width { get; private set; }
+        public int Length { get; private set; }
         public int MaxWeigth { get; private set; }
         public int MinWeigth { get; private set; }
 
-        private Random rnd = new Random();
-
         public Ship(int length, int width)
         {
-            Length = length;
-            Width = width;
+            Width = length;
+            Length = width;
             MaxWeigth = (length * width) * 150;
             MinWeigth = MaxWeigth / 2;
         }
 
         public void AddContainerToShip(Container container)
         {
-            containerList.Add(container);
+            ContainerList.Add(container);
             DistrubuteContainers();
         }
 
         private void DistrubuteContainers()
         {
-
-            //Distribution order:
-            //1 - Coolable Valuable
-            //2 - Coolable
-            //3 - Valuable
-            //4 - regular
-
             ResetRowList();
-            if (rowList.Count == 0)
+            if (RowList.Count == 0)
             {
-                rowList.Add(new Row(Width));
+                RowList.Add(new Row(Length));
             }
 
-            SortedList = containerList.OrderByDescending(o => o.Type).ToList();
+            SortedList = ContainerList.OrderByDescending(o => o.Type).ToList();
 
             //Debug.WriteLine("rowList Count: " + rowList.Count);
 
             for (int i = 0; i < SortedList.Count; i++)
             {
-                for (int x = 0; x < rowList.Count; x++)
+                try
                 {
-                    if (rowList[x].TryToAddContainer(SortedList[i]))
+                    TryToAddContainer(SortedList[i], i);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private bool TryToAddContainer(Container container, int index)
+        {
+            for (int x = 0; x < RowList.Count; x++)
+            {
+                if (RowList[x].TryToAddContainer(SortedList[index]))
+                {
+
+                }
+                else
+                {
+                    //Debug.WriteLine((rowList.Count - 1) + " " + x);
+                    if (x < (RowList.Count))
                     {
-                        
-                    }
-                    else
-                    {
-                        //Debug.WriteLine((rowList.Count - 1) + " " + x);
-                        if (x < (rowList.Count))
+                        if (RowList.Count < Width)
                         {
-                            if (rowList.Count < Length)
+                            RowList.Add(new Row(Length));
+
+                            try
                             {
-                                rowList.Add(new Row(Width));
-                                
-                                if(rowList[(rowList.Count - 1)].TryToAddContainer(SortedList[i]))
-                                {
-                                    
-                                }
-                                else
-                                {
-                                    throw new Exception("LUKT NIET");
-                                }
+                                RowList[(RowList.Count - 1)].TryToAddContainer(SortedList[index]);
+                            }
+                            catch (Exception)
+                            {
+                                throw;
                             }
                         }
                     }
                 }
             }
+
+            return true;
         }
 
         private void ResetRowList()
         {
-            rowList = new List<Row>();
+            RowList = new List<Row>();
         }
 
         public void OpenContainerVisualizer()
         {
             string stack = "";
             string weight = "";
-            for (int z = 0; z < rowList.Count; z++)
+            for (int z = 0; z < RowList.Count; z++)
             {
                 //Length / Depth
                 Debug.WriteLine(z + " z");
@@ -115,7 +121,7 @@ namespace Containervervoer
                 }
 
 
-                for (int x = 0; x < rowList[z].stackListReadable.Count; x++)
+                for (int x = 0; x < RowList[z].stackListReadable.Count; x++)
                 {
                     //Width 
                     Debug.WriteLine(x + " x");
@@ -125,9 +131,9 @@ namespace Containervervoer
                         weight += ",";
                     }
 
-                    for (int y = 0; y < rowList[z].stackListReadable[x].ContainerListReadable.Count; y++)
+                    for (int y = 0; y < RowList[z].stackListReadable[x].ContainerListReadable.Count; y++)
                     {
-                        Container container = rowList[z].stackListReadable[x].ContainerListReadable[y];
+                        Container container = RowList[z].stackListReadable[x].ContainerListReadable[y];
 
                         //Height
                         Debug.WriteLine(y + " y");
@@ -135,7 +141,7 @@ namespace Containervervoer
                         //stack += Convert.ToString(container.Type);
                         stack += Convert.ToString(container.Type);
                         weight += Convert.ToString(container.Weight);
-                        if(y < (rowList[z].stackListReadable[x].ContainerListReadable.Count - 1))
+                        if(y < (RowList[z].stackListReadable[x].ContainerListReadable.Count - 1))
                         {
                             weight += "-";
                         }
@@ -143,7 +149,7 @@ namespace Containervervoer
                     }
                 }
             }
-            Process.Start("https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"&weights="+ weight+"");
+            Process.Start($"https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length="+Length+"&width="+Width+"&stacks="+ stack +"&weights="+ weight+"");
         }
     }
 }
