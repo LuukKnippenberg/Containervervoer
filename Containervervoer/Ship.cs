@@ -38,9 +38,9 @@ namespace Containervervoer
             MinWeigth = MaxWeigth / 2;
         }
 
-        public void AddContainerToShip(int weight, int type)
+        public void AddContainerToShip(Container container)
         {
-            containerList.Add(new Container(30, type));
+            containerList.Add(container);
             DistrubuteContainers();
         }
 
@@ -84,8 +84,10 @@ namespace Containervervoer
                                 {
                                     
                                 }
-                                
-                                
+                                else
+                                {
+                                    throw new Exception("LUKT NIET");
+                                }
                             }
                         }
                     }
@@ -119,20 +121,21 @@ namespace Containervervoer
                     Debug.WriteLine(x + " x");
                     if(x > 0)
                     {
-                        stack += ',';
-                        weight += ',';
+                        stack += ",";
+                        weight += ",";
                     }
 
-                    for (int y = 0; y < rowList[z].stackListReadable[x].containerListReadable.Count; y++)
+                    for (int y = 0; y < rowList[z].stackListReadable[x].ContainerListReadable.Count; y++)
                     {
-                        Container container = rowList[z].stackListReadable[x].containerListReadable[y];
+                        Container container = rowList[z].stackListReadable[x].ContainerListReadable[y];
 
                         //Height
                         Debug.WriteLine(y + " y");
-                        
+
+                        //stack += Convert.ToString(container.Type);
                         stack += Convert.ToString(container.Type);
-                        weight += "30";
-                        if(y < (rowList[z].stackListReadable[x].containerListReadable.Count - 1))
+                        weight += Convert.ToString(container.Weight);
+                        if(y < (rowList[z].stackListReadable[x].ContainerListReadable.Count - 1))
                         {
                             weight += "-";
                         }

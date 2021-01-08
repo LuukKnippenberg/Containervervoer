@@ -9,8 +9,11 @@ namespace Containervervoer
     class Container
     {
         public int Weight { get; private set; } //In Tons
-        private int maxWeight = 30;
-        public int minWeight { get; private set; } = 4;
+        private int MaxWeight = 30;
+        public int MinWeight { get; private set; } = 4;
+
+        public bool Coolable { get; private set; }
+        public bool Valuable { get; private set; }
         public int Type { get; private set; }
 
         enum ContainerTypes
@@ -21,55 +24,56 @@ namespace Containervervoer
             CoolableValuable = 4
         }
 
-        public Container(int weight, int type)
+        public Container(int weight, bool valuable, bool coolable)
         {
             Weight = SetWeigth(weight);
-            Type = Convert.ToInt32(SetContainerType(type));
+            Valuable = valuable;
+            Coolable = coolable;
+            Type = SetType();
         }
 
-        private ContainerTypes SetContainerType(int type)
+        private int SetWeigth(int weight)
         {
-            ContainerTypes currentType = ContainerTypes.Normal; //Defaults to normal
-
-            if(type == 1)
-            {
-                currentType = ContainerTypes.Normal;
-            }
-            else if (type == 2)
-            {
-                currentType = ContainerTypes.Valuable;
-            }
-            else if (type == 3)
-            {
-                currentType = ContainerTypes.Coolable;
-            }
-            else if (type == 4)
-            {
-                currentType = ContainerTypes.CoolableValuable;
-            }
-            else
-            {
-                //Throw exception
-                
-            }
-
-            return currentType;
-        }
-
-        public int SetWeigth(int weight)
-        {
-            /*
-            if (Weight < minWeight)
+            if (weight < MinWeight)
             {
                 throw new Exception("Weight minimum is 4 tons");
             }
-            else if ( weight > maxWeight)
+            else if ( weight > MaxWeight)
             {
                 throw new Exception("Weight maximum is 30 tons");
             }
-            */
 
             return weight;
+        }
+
+        private int SetType()
+        {
+            if (!Valuable && !Coolable)
+            {
+                return 1;
+            }
+
+            if (Valuable && !Coolable)
+            {
+                return 2;
+            }
+
+            if (!Valuable && Coolable)
+            {
+                return 3;
+            }
+
+            if (Valuable && Coolable)
+            {
+                return 4;
+            }
+
+            return 1;
+        }
+
+        public string ReturnContainerInfoString()
+        {
+            return $"Weight: {Weight} Valuable: {Valuable} Coolable: {Coolable}"; ;
         }
     }
 }

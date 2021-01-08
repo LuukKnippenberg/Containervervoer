@@ -10,55 +10,59 @@ namespace Containervervoer
 {
     class Row
     {
-        private List<Stack> stackList = new List<Stack>();
+        private List<Stack> StackList = new List<Stack>();
         public ReadOnlyCollection<Stack> stackListReadable
         {
-            get { return stackList.AsReadOnly(); }
+            get { return StackList.AsReadOnly(); }
         }
         public int Width { get; private set; }
         public Row(int width)
         {
             Width = width;
+            StackList = InitializeStackList();
         }
 
         public bool TryToAddContainer(Container container)
         {
-            if(stackList.Count == 0)
+            for (int i = 0; i < StackList.Count; i++)
             {
-                stackList.Add(new Stack());
-            }
-
-            for (int i = 0; i < stackList.Count; i++)
-            {
-                if (stackList[i].TryToAddContainerToStack(container))
+                if (StackList[i].TryToAddContainerToStack(container))
                 {
+                    if (container.Valuable)
+                    {
+                        if (StackList[i + 1] != null)
+                        {
+                            StackList[i + 1].SetReserved();
+                        }
+                    }
+
                     return true;
                 }
                 else
                 {
-                    if(i == (stackList.Count - 1))
+                    if (container.Coolable) 
                     {
-                        if(stackList.Count < Width)
-                        {
-                            
-                            stackList.Add(new Stack());
-                            if(stackList[(stackList.Count - 1)].TryToAddContainerToStack(container))
-                            {
-                                //Debug.WriteLine("stackList.Count: " + stackList.Count + " Width: " + Width);
-                                return true;
-                            }
-                            
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        //Debug.WriteLine("stackList.Count: " + stackList.Count + " Width: " + Width);
+                        return false;
                     }
+                    
                 }
             }
 
             return false;
         }
 
+
+        private List<Stack> InitializeStackList()
+        {
+            List<Stack> tempStackList = new List<Stack>();
+
+            for (int i = 0; i < Width; i++)
+            {
+                tempStackList.Add(new Stack(i));
+            }
+
+            return tempStackList;
+        }
     }
 }

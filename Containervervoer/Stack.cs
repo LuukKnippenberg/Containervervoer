@@ -10,51 +10,66 @@ namespace Containervervoer
 {
     class Stack
     {
-        private List<Container> containerList = new List<Container>();
-        public ReadOnlyCollection<Container> containerListReadable
+        private List<Container> ContainerList = new List<Container>();
+        public ReadOnlyCollection<Container> ContainerListReadable
         {
-            get { return containerList.AsReadOnly(); }
+            get { return ContainerList.AsReadOnly(); }
         }
-        public int maxWeight = 120; //Ton
-        public int currentWeight { get; private set; }
-        public bool isFull { get; private set; } = false;
-        public Stack()
-        {
+        public int MaxWeight = 120; //Ton
+        public int CurrentWeight { get; private set; }
+        public bool IsFull { get; private set; } = false;
+        public bool Reserved { get; private set; } = false;
 
+        public int Position { get; private set; }
+        public Stack(int position)
+        {
+            Position = position;
         }
 
         public bool TryToAddContainerToStack(Container container)
         {
-            switch (container.Type)
+            if (Reserved)
             {
-                case 0:
-                    
-                    break;
-                case 1:
-                    
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-                    TryToAddContainerToStack(container);
-                    break;
-                default:
-                    break;
+                return false;
             }
 
-            if(container.Type == 3 || container.Type == 2)
-            {
-                
-            }
-            if((currentWeight + container.Weight) <= maxWeight)
-            {
-                containerList.Add(container);
-                currentWeight += container.Weight;
 
-                if((currentWeight + container.minWeight) >= maxWeight)
+
+            if (container.Coolable && Position > 0)
+            {
+                return false;
+            }
+
+            if((CurrentWeight + container.Weight) <= MaxWeight)
+            {
+                if (container.Valuable)
                 {
-                    isFull = true;
+                    if(ContainerList.Count == 0)
+                    {
+                        ContainerList.Add(container);
+                    }
+                    else
+                    {
+                        if (!ContainerList[(ContainerList.Count - 1)].Valuable)
+                        {
+                            ContainerList.Add(container);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    ContainerList.Insert(0, container);
+                }
+                
+                CurrentWeight += container.Weight;
+
+                if((CurrentWeight + container.MinWeight) >= MaxWeight)
+                {
+                    IsFull = true;
                 }
 
                 return true;
@@ -62,11 +77,20 @@ namespace Containervervoer
             
             return false;
         }
-        public bool CheckIfFrontRow(Container container)
+
+        public bool CheckIfFrontRow()
         {
-            
+            if (Position == 0)
+            {
+                return true;
+            }
 
             return false;
+        }
+
+        public void SetReserved()
+        {
+            Reserved = true;
         }
     }    
 }

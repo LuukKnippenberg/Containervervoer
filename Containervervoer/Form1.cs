@@ -13,19 +13,12 @@ namespace Containervervoer
     public partial class Form1 : Form
     {
         Ship ship;
-        private List<string[]> tempContainers = new List<string[]>();
+        //private List<string[]> tempContainers = new List<string[]>();
+
+        private List<Container> tempContainers = new List<Container>();
         public Form1()
         {
             InitializeComponent();
-
-            cbType.DataSource = new ComboItem[]
-            {
-                new ComboItem{ ID = 0, Text = "Normal" },
-                new ComboItem{ ID = 0, Text = "Valuable" },
-                new ComboItem{ ID = 0, Text = "Cooled" },
-                new ComboItem{ ID = 0, Text = "Cooled Valuable" }
-            };
-
         }
 
         class ComboItem
@@ -36,12 +29,28 @@ namespace Containervervoer
 
         private void btnAddContainer_Click(object sender, EventArgs e)
         {
-            string comboItem = $"Weigth: {nupWeight.Value.ToString()} Type: {cbType.SelectedIndex} ";
+            bool coolable = false;
+            bool valuable = false;
+            int weight = Convert.ToInt32(nupWeight.Value);
+
+
+
+            if (cbCoolable.Checked)
+            {
+                coolable = true;
+            }
+            if (cbValuable.Checked)
+            {
+                valuable = true;
+            }
+
+            string comboItem = $"Weigth: {nupWeight.Value.ToString()} Valuable: {valuable.ToString()} Coolable: {coolable.ToString()} ";
+
             for (int i = 0; i < nupAmount.Value; i++)
             {
-                //ship.AddContainerToShip(Convert.ToInt32(nupWeight.Value), (cbType.SelectedIndex + 1));
-                lvContainers.Items.Add(comboItem);
-                string[] tempContainer = { nupWeight.Value.ToString(), (cbType.SelectedIndex + 1).ToString() };
+                //ship.AddContainerToShip(Convert.ToInt32(nupWeight.Value), (cbType.SelectedIndex + 1));                
+                Container tempContainer = new Container(weight, valuable, coolable);
+                lbContainers.Items.Add(tempContainer.ReturnContainerInfoString());
                 tempContainers.Add(tempContainer);
             }
         }
@@ -52,7 +61,7 @@ namespace Containervervoer
 
             foreach (var item in tempContainers)
             {
-                ship.AddContainerToShip(Convert.ToInt32(item[0]), Convert.ToInt32(item[1]));
+                ship.AddContainerToShip(item);
             }
 
             ship.OpenContainerVisualizer();
@@ -60,7 +69,7 @@ namespace Containervervoer
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            lvContainers.Clear();
+            lbContainers.Items.Clear();
             tempContainers.Clear();
         }
     }

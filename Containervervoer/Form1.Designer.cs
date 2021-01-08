@@ -35,25 +35,26 @@ namespace Containervervoer
             this.nupWidth = new System.Windows.Forms.NumericUpDown();
             this.lblWidth = new System.Windows.Forms.Label();
             this.btnAddContainer = new System.Windows.Forms.Button();
-            this.lvContainers = new System.Windows.Forms.ListView();
             this.nupWeight = new System.Windows.Forms.NumericUpDown();
             this.lblWeight = new System.Windows.Forms.Label();
             this.gbBoatControls = new System.Windows.Forms.GroupBox();
             this.gbContainerControls = new System.Windows.Forms.GroupBox();
-            this.cbType = new System.Windows.Forms.ComboBox();
+            this.cbCoolable = new System.Windows.Forms.CheckBox();
+            this.cbValuable = new System.Windows.Forms.CheckBox();
+            this.nupAmount = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.gbControls = new System.Windows.Forms.GroupBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnVisualize = new System.Windows.Forms.Button();
-            this.nupAmount = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbContainers = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.nupLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWeight)).BeginInit();
             this.gbBoatControls.SuspendLayout();
             this.gbContainerControls.SuspendLayout();
-            this.gbControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).BeginInit();
+            this.gbControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLength
@@ -118,15 +119,6 @@ namespace Containervervoer
             this.btnAddContainer.UseVisualStyleBackColor = true;
             this.btnAddContainer.Click += new System.EventHandler(this.btnAddContainer_Click);
             // 
-            // lvContainers
-            // 
-            this.lvContainers.HideSelection = false;
-            this.lvContainers.Location = new System.Drawing.Point(246, 12);
-            this.lvContainers.Name = "lvContainers";
-            this.lvContainers.Size = new System.Drawing.Size(285, 426);
-            this.lvContainers.TabIndex = 10;
-            this.lvContainers.UseCompatibleStateImageBehavior = false;
-            // 
             // nupWeight
             // 
             this.nupWeight.Location = new System.Drawing.Point(19, 42);
@@ -136,7 +128,7 @@ namespace Containervervoer
             0,
             0});
             this.nupWeight.Minimum = new decimal(new int[] {
-            1,
+            30,
             0,
             0,
             0});
@@ -144,7 +136,7 @@ namespace Containervervoer
             this.nupWeight.Size = new System.Drawing.Size(59, 20);
             this.nupWeight.TabIndex = 11;
             this.nupWeight.Value = new decimal(new int[] {
-            1,
+            30,
             0,
             0,
             0});
@@ -173,9 +165,10 @@ namespace Containervervoer
             // 
             // gbContainerControls
             // 
+            this.gbContainerControls.Controls.Add(this.cbCoolable);
+            this.gbContainerControls.Controls.Add(this.cbValuable);
             this.gbContainerControls.Controls.Add(this.nupAmount);
             this.gbContainerControls.Controls.Add(this.label1);
-            this.gbContainerControls.Controls.Add(this.cbType);
             this.gbContainerControls.Controls.Add(this.lblType);
             this.gbContainerControls.Controls.Add(this.nupWeight);
             this.gbContainerControls.Controls.Add(this.btnAddContainer);
@@ -187,16 +180,56 @@ namespace Containervervoer
             this.gbContainerControls.TabStop = false;
             this.gbContainerControls.Text = "Container";
             // 
-            // cbType
+            // cbCoolable
             // 
-            this.cbType.DisplayMember = "Text";
-            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(19, 90);
-            this.cbType.Name = "cbType";
-            this.cbType.Size = new System.Drawing.Size(121, 21);
-            this.cbType.TabIndex = 14;
-            this.cbType.ValueMember = "ID";
+            this.cbCoolable.AutoSize = true;
+            this.cbCoolable.Location = new System.Drawing.Point(22, 113);
+            this.cbCoolable.Name = "cbCoolable";
+            this.cbCoolable.Size = new System.Drawing.Size(67, 17);
+            this.cbCoolable.TabIndex = 18;
+            this.cbCoolable.Text = "Coolable";
+            this.cbCoolable.UseVisualStyleBackColor = true;
+            // 
+            // cbValuable
+            // 
+            this.cbValuable.AutoSize = true;
+            this.cbValuable.Location = new System.Drawing.Point(22, 90);
+            this.cbValuable.Name = "cbValuable";
+            this.cbValuable.Size = new System.Drawing.Size(67, 17);
+            this.cbValuable.TabIndex = 17;
+            this.cbValuable.Text = "Valuable";
+            this.cbValuable.UseVisualStyleBackColor = true;
+            // 
+            // nupAmount
+            // 
+            this.nupAmount.Location = new System.Drawing.Point(20, 159);
+            this.nupAmount.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nupAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupAmount.Name = "nupAmount";
+            this.nupAmount.Size = new System.Drawing.Size(59, 20);
+            this.nupAmount.TabIndex = 15;
+            this.nupAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Amount";
             // 
             // lblType
             // 
@@ -238,46 +271,23 @@ namespace Containervervoer
             this.btnVisualize.UseVisualStyleBackColor = true;
             this.btnVisualize.Click += new System.EventHandler(this.btnVisualize_Click);
             // 
-            // nupAmount
+            // lbContainers
             // 
-            this.nupAmount.Location = new System.Drawing.Point(19, 138);
-            this.nupAmount.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.nupAmount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nupAmount.Name = "nupAmount";
-            this.nupAmount.Size = new System.Drawing.Size(59, 20);
-            this.nupAmount.TabIndex = 15;
-            this.nupAmount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 122);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Amount";
+            this.lbContainers.FormattingEnabled = true;
+            this.lbContainers.Location = new System.Drawing.Point(246, 12);
+            this.lbContainers.Name = "lbContainers";
+            this.lbContainers.Size = new System.Drawing.Size(285, 433);
+            this.lbContainers.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbContainers);
             this.Controls.Add(this.gbControls);
             this.Controls.Add(this.gbContainerControls);
             this.Controls.Add(this.gbBoatControls);
-            this.Controls.Add(this.lvContainers);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.nupLength)).EndInit();
@@ -287,8 +297,8 @@ namespace Containervervoer
             this.gbBoatControls.PerformLayout();
             this.gbContainerControls.ResumeLayout(false);
             this.gbContainerControls.PerformLayout();
-            this.gbControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).EndInit();
+            this.gbControls.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -298,12 +308,10 @@ namespace Containervervoer
         private System.Windows.Forms.NumericUpDown nupLength;
         private System.Windows.Forms.NumericUpDown nupWidth;
         private System.Windows.Forms.Label lblWidth;
-        private System.Windows.Forms.ListView lvContainers;
         private System.Windows.Forms.NumericUpDown nupWeight;
         private System.Windows.Forms.Label lblWeight;
         private System.Windows.Forms.GroupBox gbBoatControls;
         private System.Windows.Forms.GroupBox gbContainerControls;
-        private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Button btnAddContainer;
         private GroupBox gbControls;
@@ -311,6 +319,9 @@ namespace Containervervoer
         private Button btnReset;
         private NumericUpDown nupAmount;
         private Label label1;
+        private CheckBox cbValuable;
+        private CheckBox cbCoolable;
+        private ListBox lbContainers;
     }
 }
 
