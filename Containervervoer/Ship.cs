@@ -72,9 +72,9 @@ namespace Containervervoer
         {
             for (int x = 0; x < RowList.Count; x++)
             {
-                if (RowList[x].TryToAddContainer(SortedList[index]))
+                if (RowList[x].TryToAddContainer(container))
                 {
-
+                    return true;
                 }
                 else
                 {
@@ -87,7 +87,8 @@ namespace Containervervoer
 
                             try
                             {
-                                RowList[(RowList.Count - 1)].TryToAddContainer(SortedList[index]);
+                                RowList[(RowList.Count - 1)].TryToAddContainer(container);
+                                return true;
                             }
                             catch (Exception)
                             {
