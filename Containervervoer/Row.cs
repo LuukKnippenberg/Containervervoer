@@ -16,10 +16,20 @@ namespace Containervervoer
             get { return StackList.AsReadOnly(); }
         }
         public int Width { get; private set; }
-        public Row(int width)
+        private RowSide Side;
+        
+        public Row(int width, int side)
         {
             Width = width;
             StackList = InitializeStackList();
+            Side = (RowSide)side;
+        }
+
+        enum RowSide
+        {
+            Left = 1,
+            Centre = 2,
+            Right = 3,
         }
 
         public bool TryToAddContainer(Container container)
@@ -62,5 +72,11 @@ namespace Containervervoer
 
             return tempStackList;
         }
+
+        public int ReturnSide()
+        {
+            return Convert.ToInt32(Side);
+        }
+        
     }
 }

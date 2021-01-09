@@ -128,7 +128,7 @@ namespace Containervervoer
             0,
             0});
             this.nupWeight.Minimum = new decimal(new int[] {
-            30,
+            4,
             0,
             0,
             0});
