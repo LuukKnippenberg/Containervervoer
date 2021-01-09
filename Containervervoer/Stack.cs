@@ -15,14 +15,16 @@ namespace Containervervoer
         {
             get { return ContainerList.AsReadOnly(); }
         }
-        public int MaxWeight = 150; //Ton
+        public int MaxWeight { get; private set; } = 150; //Ton
+        public int MaxHeight { get; private set; } 
         public int CurrentWeight { get; private set; }
         public bool IsFull { get; private set; } = false;
         public bool Reserved { get; private set; } = false;
 
         public int Position { get; private set; }
-        public Stack(int position)
+        public Stack(int position, int maxHeight)
         {
+            MaxHeight = maxHeight;
             Position = position;
         }
 

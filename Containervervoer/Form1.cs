@@ -57,14 +57,16 @@ namespace Containervervoer
 
         private void btnVisualize_Click(object sender, EventArgs e)
         {
-            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value));
+            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value), Convert.ToInt32(nupHeight));
 
             foreach (var item in tempContainers)
             {
                 ship.AddContainerToShip(item);
             }
 
-            ship.OpenContainerVisualizer();
+            ship.StartupSequence();
+            //ship.DistrubuteContainers();
+            //ship.OpenContainerVisualizer();
         }
 
         private void btnReset_Click(object sender, EventArgs e)

@@ -17,12 +17,14 @@ namespace Containervervoer
         }
         public int Width { get; private set; }
         private RowSide Side;
+        public int MaxHeight { get; private set; }
         
-        public Row(int width, int side)
+        public Row(int width, int side, int maxHeight)
         {
             Width = width;
             StackList = InitializeStackList();
             Side = (RowSide)side;
+            MaxHeight = maxHeight;
         }
 
         enum RowSide
@@ -67,7 +69,7 @@ namespace Containervervoer
 
             for (int i = 0; i < Width; i++)
             {
-                tempStackList.Add(new Stack(i));
+                tempStackList.Add(new Stack(i, MaxHeight));
             }
 
             return tempStackList;

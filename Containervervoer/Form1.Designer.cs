@@ -48,6 +48,8 @@ namespace Containervervoer
             this.btnReset = new System.Windows.Forms.Button();
             this.btnVisualize = new System.Windows.Forms.Button();
             this.lbContainers = new System.Windows.Forms.ListBox();
+            this.lblHeight = new System.Windows.Forms.Label();
+            this.nupHeight = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nupLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWeight)).BeginInit();
@@ -55,6 +57,7 @@ namespace Containervervoer
             this.gbContainerControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).BeginInit();
             this.gbControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWidth
@@ -152,6 +155,8 @@ namespace Containervervoer
             // 
             // gbBoatControls
             // 
+            this.gbBoatControls.Controls.Add(this.lblHeight);
+            this.gbBoatControls.Controls.Add(this.nupHeight);
             this.gbBoatControls.Controls.Add(this.lblWidth);
             this.gbBoatControls.Controls.Add(this.nupLength);
             this.gbBoatControls.Controls.Add(this.lblLength);
@@ -279,6 +284,37 @@ namespace Containervervoer
             this.lbContainers.Size = new System.Drawing.Size(285, 433);
             this.lbContainers.TabIndex = 15;
             // 
+            // lblHeight
+            // 
+            this.lblHeight.AutoSize = true;
+            this.lblHeight.Location = new System.Drawing.Point(146, 29);
+            this.lblHeight.Name = "lblHeight";
+            this.lblHeight.Size = new System.Drawing.Size(38, 13);
+            this.lblHeight.TabIndex = 6;
+            this.lblHeight.Text = "Height";
+            // 
+            // nupHeight
+            // 
+            this.nupHeight.Location = new System.Drawing.Point(149, 45);
+            this.nupHeight.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nupHeight.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nupHeight.Name = "nupHeight";
+            this.nupHeight.Size = new System.Drawing.Size(59, 20);
+            this.nupHeight.TabIndex = 7;
+            this.nupHeight.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,6 +335,7 @@ namespace Containervervoer
             this.gbContainerControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).EndInit();
             this.gbControls.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nupHeight)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,6 +359,8 @@ namespace Containervervoer
         private CheckBox cbValuable;
         private CheckBox cbCoolable;
         private ListBox lbContainers;
+        private Label lblHeight;
+        private NumericUpDown nupHeight;
     }
 }
 

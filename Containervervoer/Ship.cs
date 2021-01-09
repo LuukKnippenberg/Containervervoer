@@ -27,24 +27,26 @@ namespace Containervervoer
         public int Length { get; private set; }
         public int MaxWeigth { get; private set; }
         public int MinWeigth { get; private set; }
+        private int MaxHeight;
+
         private float WeightDifference;
         private int WeightLeft;
         private int WeightCenter;
         private int WeightRight;
         private int TotalWeight;
 
-        public Ship(int length, int width)
+        public Ship(int length, int width, int maxHeight)
         {
             Width = length;
             Length = width;
             MaxWeigth = (length * width) * 150;
             MinWeigth = MaxWeigth / 2;
+            MaxHeight = maxHeight;
         }
 
         public void AddContainerToShip(Container container)
         {
             ContainerList.Add(container);
-            DistrubuteContainers();
         }
 
         private void ResetData()
@@ -57,13 +59,23 @@ namespace Containervervoer
             RowList = InitializeRowList();
         }
 
+        public void StartupSequence()
+        {
+
+            DistrubuteContainers();
+            if(WeightDifference < 20)
+            {
+                OpenContainerVisualizer();
+            }
+        }
+
         private void DistrubuteContainers()
         {
             ResetData();
             int weightSum = GetWeightSum();
             
             //DEVELOPMENT TRUE == TRUE
-            if(weightSum >= MinWeigth && weightSum <= MaxWeigth /*|| true == true*/)
+            if(weightSum >= MinWeigth && weightSum <= MaxWeigth || true == true)
             {
 
                 SortedContainerList = ContainerList.OrderByDescending(o => o.Type).ToList();
@@ -72,22 +84,12 @@ namespace Containervervoer
                 {
                     if (TryToAddContainerLeftOrRight(SortedContainerList[i], i))
                     {
-
+                        UpdateWeightDifference();
                     }
                     else
                     {
                         TryToAddContainerCenter(SortedContainerList[i]);
                     }
-                    /*
-                    try
-                    {
-                        TryToAddContainerLeftOrRight(SortedContainerList[i], i);
-                    }
-                    catch (Exception)
-                    {
-                        TryToAddContainerCenter(SortedContainerList[i]);
-                    }
-                    */
                 }
             }
         }
@@ -102,7 +104,6 @@ namespace Containervervoer
                     {
                         WeightCenter += container.Weight;
                         TotalWeight += container.Weight;
-                        UpdateWeightDifference();
                         return true;
                     }
                 }
@@ -124,7 +125,6 @@ namespace Containervervoer
                         {
                             WeightLeft += container.Weight;
                             TotalWeight += container.Weight;
-                            UpdateWeightDifference();
                             return true;
                         }
                     }
@@ -137,36 +137,10 @@ namespace Containervervoer
                         {
                             WeightRight += container.Weight;
                             TotalWeight += container.Weight;
-                            UpdateWeightDifference();
                             return true;
                         }
                     }
                 }
-
-                /*
-                if (RowList[x].TryToAddContainer(container))
-                {
-                    int returnSide = RowList[x].ReturnSide();
-
-                    switch (returnSide)
-                    {
-                        case 1:
-                            WeightLeft += container.Weight;
-                            break;
-                        case 2:
-                            WeightCentre += container.Weight;
-                            break;
-                        case 3:
-                            WeightRight += container.Weight;
-                            break;
-                        default:
-                            break;
-                    }
-                    TotalWeight += container.Weight;
-                    UpdateWeightDifference();
-                    return true;
-                }
-                */
             }
 
             return false;
@@ -250,7 +224,7 @@ namespace Containervervoer
                         side = 3;
                     }
 
-                    tempRowList.Add(new Row(Length, side));
+                    tempRowList.Add(new Row(Length, side, MaxHeight));
                 }
 
             }
@@ -269,30 +243,33 @@ namespace Containervervoer
                         side = 3;
                     }
 
-                    tempRowList.Add(new Row(Length, side));
+                    tempRowList.Add(new Row(Length, side, MaxHeight));
                 }
             }
-            
-
-            
-
             return tempRowList;
         }
 
         private void UpdateWeightDifference()
         {
-            float centerPercentage = (WeightCenter / TotalWeight) * 100;
-            float leftPercentage = (WeightLeft / TotalWeight) * 100;
-            float rightPercentage = (WeightRight / TotalWeight) * 100;
+            //float centerPercentage = (WeightCenter / TotalWeight) * 100;
+            double leftPercentage = ((double)WeightLeft / (double)TotalWeight) * 100;
+            double rightPercentage = ((double)WeightRight / (double)TotalWeight) * 100;
 
-            WeightDifference = Math.Abs(leftPercentage - rightPercentage);
+            if (Width % 2 == 0) //Is Even
+            {
+                WeightDifference = (float)leftPercentage - (float)rightPercentage;
+            }
+            else
+            {
+                //WeightDifference = Math.Abs(leftPercentage - rightPercentage);
+            }
 
-            Console.WriteLine($"Left: {WeightLeft} Center: {WeightCenter} Right: {WeightRight}");
+            if(WeightDifference < 0)
+            {
+                WeightDifference = WeightDifference * -1;
+            }
 
-            //Console.WriteLine($"Left {leftPercentage }%");
-            //Console.WriteLine($"Centre {centrePercentage }%");
-            //Console.WriteLine($"Right {rightPercentage }%");
-            //Console.WriteLine($"{WeightDifference}%");
+            Console.WriteLine($"Left: {WeightLeft} Center: {WeightCenter} Right: {WeightRight} - Weight Difference: {WeightDifference}");
 
         }
     }
