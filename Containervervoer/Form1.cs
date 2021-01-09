@@ -44,11 +44,8 @@ namespace Containervervoer
                 valuable = true;
             }
 
-            string comboItem = $"Weigth: {nupWeight.Value.ToString()} Valuable: {valuable.ToString()} Coolable: {coolable.ToString()} ";
-
             for (int i = 0; i < nupAmount.Value; i++)
-            {
-                //ship.AddContainerToShip(Convert.ToInt32(nupWeight.Value), (cbType.SelectedIndex + 1));                
+            {              
                 Container tempContainer = new Container(weight, valuable, coolable);
                 lbContainers.Items.Add(tempContainer.ReturnContainerInfoString());
                 tempContainers.Add(tempContainer);
@@ -57,14 +54,14 @@ namespace Containervervoer
 
         private void btnVisualize_Click(object sender, EventArgs e)
         {
-            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value), Convert.ToInt32(nupHeight));
+            ship = new Ship(Convert.ToInt32(nupLength.Value), Convert.ToInt32(nupWidth.Value), Convert.ToInt32(nupHeight.Value));
 
             foreach (var item in tempContainers)
             {
                 ship.AddContainerToShip(item);
             }
 
-            ship.StartupSequence();
+            lblFeedback.Text = ship.AlgorithmHandler();
             //ship.DistrubuteContainers();
             //ship.OpenContainerVisualizer();
         }

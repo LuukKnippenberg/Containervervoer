@@ -21,6 +21,7 @@ namespace Containervervoer
         }
 
         private List<Container> SortedContainerList = new List<Container>();
+        private int amountOfContainersSorted;
 
         private List<Row> RowList = new List<Row>();
         public int Width { get; private set; }
@@ -51,6 +52,7 @@ namespace Containervervoer
 
         private void ResetData()
         {
+            amountOfContainersSorted = 0;
             TotalWeight = 0;
             WeightLeft = 0;
             WeightRight = 0;
@@ -59,14 +61,27 @@ namespace Containervervoer
             RowList = InitializeRowList();
         }
 
-        public void StartupSequence()
+        public string AlgorithmHandler()
         {
-
             DistrubuteContainers();
-            if(WeightDifference < 20)
+            if(amountOfContainersSorted == ContainerList.Count)
             {
-                OpenContainerVisualizer();
+                if (WeightDifference < 20)
+                {
+                    OpenContainerVisualizer();
+                }
+                else
+                {
+                    return "Weight is too unbalanced";
+                }
             }
+            else
+            {
+                return "Ship is too small";
+            }
+
+            return "Success";
+            
         }
 
         private void DistrubuteContainers()
@@ -78,17 +93,22 @@ namespace Containervervoer
             if(weightSum >= MinWeigth && weightSum <= MaxWeigth || true == true)
             {
 
-                SortedContainerList = ContainerList.OrderByDescending(o => o.Type).ToList();
+                SortedContainerList = ContainerList.OrderByDescending(o => o.Type).ThenByDescending(o => o.Weight).ToList();
 
                 for (int i = 0; i < SortedContainerList.Count; i++)
                 {
                     if (TryToAddContainerLeftOrRight(SortedContainerList[i], i))
                     {
+                        amountOfContainersSorted++;
                         UpdateWeightDifference();
                     }
                     else
                     {
-                        TryToAddContainerCenter(SortedContainerList[i]);
+                        if (TryToAddContainerCenter(SortedContainerList[i]))
+                        {
+                            amountOfContainersSorted++;
+                        }
+                        
                     }
                 }
             }
@@ -153,7 +173,6 @@ namespace Containervervoer
             for (int z = 0; z < RowList.Count; z++)
             {
                 //Length / Depth
-                //Debug.WriteLine(z + " z");
                 if(z > 0)
                 {
                     stack += '/';
@@ -164,7 +183,6 @@ namespace Containervervoer
                 for (int x = 0; x < RowList[z].stackListReadable.Count; x++)
                 {
                     //Width 
-                    //Debug.WriteLine(x + " x");
                     if(x > 0)
                     {
                         stack += ",";
@@ -176,9 +194,6 @@ namespace Containervervoer
                         Container container = RowList[z].stackListReadable[x].ContainerListReadable[y];
 
                         //Height
-                        //Debug.WriteLine(y + " y");
-
-                        //stack += Convert.ToString(container.Type);
                         stack += Convert.ToString(container.Type);
                         weight += Convert.ToString(container.Weight);
                         if(y < (RowList[z].stackListReadable[x].ContainerListReadable.Count - 1))
@@ -251,7 +266,6 @@ namespace Containervervoer
 
         private void UpdateWeightDifference()
         {
-            //float centerPercentage = (WeightCenter / TotalWeight) * 100;
             double leftPercentage = ((double)WeightLeft / (double)TotalWeight) * 100;
             double rightPercentage = ((double)WeightRight / (double)TotalWeight) * 100;
 
@@ -261,7 +275,9 @@ namespace Containervervoer
             }
             else
             {
-                //WeightDifference = Math.Abs(leftPercentage - rightPercentage);
+                // The ContainerVisualizer seems to incorrectly include the middle row in the weight balance calculation. 
+                // Which is why this else statement is here. 
+                WeightDifference = (float)leftPercentage - (float)rightPercentage;
             }
 
             if(WeightDifference < 0)

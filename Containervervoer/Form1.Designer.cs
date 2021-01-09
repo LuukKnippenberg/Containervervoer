@@ -50,6 +50,8 @@ namespace Containervervoer
             this.lbContainers = new System.Windows.Forms.ListBox();
             this.lblHeight = new System.Windows.Forms.Label();
             this.nupHeight = new System.Windows.Forms.NumericUpDown();
+            this.gbFeedback = new System.Windows.Forms.GroupBox();
+            this.lblFeedback = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nupLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupWeight)).BeginInit();
@@ -58,6 +60,7 @@ namespace Containervervoer
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).BeginInit();
             this.gbControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupHeight)).BeginInit();
+            this.gbFeedback.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWidth
@@ -72,8 +75,13 @@ namespace Containervervoer
             // nupLength
             // 
             this.nupLength.Location = new System.Drawing.Point(20, 45);
+            this.nupLength.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.nupLength.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -81,7 +89,7 @@ namespace Containervervoer
             this.nupLength.Size = new System.Drawing.Size(58, 20);
             this.nupLength.TabIndex = 3;
             this.nupLength.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -89,8 +97,13 @@ namespace Containervervoer
             // nupWidth
             // 
             this.nupWidth.Location = new System.Drawing.Point(84, 45);
+            this.nupWidth.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.nupWidth.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -98,7 +111,7 @@ namespace Containervervoer
             this.nupWidth.Size = new System.Drawing.Size(59, 20);
             this.nupWidth.TabIndex = 5;
             this.nupWidth.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -315,11 +328,31 @@ namespace Containervervoer
             0,
             0});
             // 
+            // gbFeedback
+            // 
+            this.gbFeedback.Controls.Add(this.lblFeedback);
+            this.gbFeedback.Location = new System.Drawing.Point(560, 15);
+            this.gbFeedback.Name = "gbFeedback";
+            this.gbFeedback.Size = new System.Drawing.Size(228, 254);
+            this.gbFeedback.TabIndex = 15;
+            this.gbFeedback.TabStop = false;
+            this.gbFeedback.Text = "Feedback";
+            // 
+            // lblFeedback
+            // 
+            this.lblFeedback.AutoSize = true;
+            this.lblFeedback.Location = new System.Drawing.Point(6, 26);
+            this.lblFeedback.Name = "lblFeedback";
+            this.lblFeedback.Size = new System.Drawing.Size(55, 13);
+            this.lblFeedback.TabIndex = 8;
+            this.lblFeedback.Text = "Feedback";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.gbFeedback);
             this.Controls.Add(this.lbContainers);
             this.Controls.Add(this.gbControls);
             this.Controls.Add(this.gbContainerControls);
@@ -336,6 +369,8 @@ namespace Containervervoer
             ((System.ComponentModel.ISupportInitialize)(this.nupAmount)).EndInit();
             this.gbControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nupHeight)).EndInit();
+            this.gbFeedback.ResumeLayout(false);
+            this.gbFeedback.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -361,6 +396,8 @@ namespace Containervervoer
         private ListBox lbContainers;
         private Label lblHeight;
         private NumericUpDown nupHeight;
+        private GroupBox gbFeedback;
+        private Label lblFeedback;
     }
 }
 

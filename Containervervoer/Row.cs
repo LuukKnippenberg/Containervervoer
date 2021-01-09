@@ -22,9 +22,10 @@ namespace Containervervoer
         public Row(int width, int side, int maxHeight)
         {
             Width = width;
+            MaxHeight = maxHeight;
             StackList = InitializeStackList();
             Side = (RowSide)side;
-            MaxHeight = maxHeight;
+            
         }
 
         enum RowSide

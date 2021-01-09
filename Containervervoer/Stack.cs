@@ -30,6 +30,11 @@ namespace Containervervoer
 
         public bool TryToAddContainerToStack(Container container)
         {
+            if(ContainerList.Count >= MaxHeight)
+            {
+                return false;
+            }
+
             if (Reserved)
             {
                 return false;
