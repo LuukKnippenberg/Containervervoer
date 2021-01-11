@@ -259,7 +259,7 @@ namespace Containervervoer
             }
             else //Is Odd
             {
-                double middle = (Math.Round((Width / 2f)) - 1);
+                double middle = Math.Floor(Width / 2f);
                 for (int i = 0; i < Width; i++)
                 {
                     int side = 2;
