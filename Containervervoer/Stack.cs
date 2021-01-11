@@ -20,12 +20,16 @@ namespace Containervervoer
         public int CurrentWeight { get; private set; }
         public bool IsFull { get; private set; } = false;
         public bool Reserved { get; private set; } = false;
+        public bool IsFront { get; private set; }
+        public bool IsBack { get; private set; }
 
         public int Position { get; private set; }
-        public Stack(int position, int maxHeight)
+        public Stack(int position, int maxHeight, bool isFront, bool isBack)
         {
             MaxHeight = maxHeight;
             Position = position;
+            IsFront = isFront;
+            IsBack = isBack;
         }
 
         public bool TryToAddContainerToStack(Container container)
@@ -82,16 +86,6 @@ namespace Containervervoer
                 return true;
             }
             
-            return false;
-        }
-
-        public bool CheckIfFrontRow()
-        {
-            if (Position == 0)
-            {
-                return true;
-            }
-
             return false;
         }
 

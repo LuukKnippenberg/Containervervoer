@@ -14,9 +14,9 @@ namespace Containervervoer
 
         public bool Coolable { get; private set; }
         public bool Valuable { get; private set; }
-        public int Type { get; private set; }
+        public ContainerTypes Type { get; private set; }
 
-        enum ContainerTypes
+        public enum ContainerTypes
         {
             Normal = 1,
             Valuable = 2,
@@ -46,29 +46,29 @@ namespace Containervervoer
             return weight;
         }
 
-        private int SetType()
+        private ContainerTypes SetType()
         {
             if (!Valuable && !Coolable)
             {
-                return 1;
+                return (ContainerTypes)1;
             }
 
             if (Valuable && !Coolable)
             {
-                return 2;
+                return (ContainerTypes)2;
             }
 
             if (!Valuable && Coolable)
             {
-                return 3;
+                return (ContainerTypes)3;
             }
 
             if (Valuable && Coolable)
             {
-                return 4;
+                return (ContainerTypes)4;
             }
 
-            return 1;
+            return (ContainerTypes)1;
         }
 
         public string ReturnContainerInfoString()

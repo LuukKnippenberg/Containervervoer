@@ -63,28 +63,41 @@ namespace Containervervoer
 
         public string AlgorithmHandler()
         {
-            DistrubuteContainers();
-            if(amountOfContainersSorted == ContainerList.Count)
+            int amountOfSlots = Length * Width * MaxHeight;
+
+            if(ContainerList.Count > amountOfSlots)
             {
-                if (WeightDifference < 20)
+                return "Ship is too small";
+            }
+
+            if (DistrubuteContainers())
+            {
+                if (amountOfContainersSorted == ContainerList.Count)
                 {
-                    OpenContainerVisualizer();
+                    if (WeightDifference < 20)
+                    {
+                        OpenContainerVisualizer();
+                    }
+                    else
+                    {
+                        return "Weight is too unbalanced";
+                    }
                 }
                 else
                 {
-                    return "Weight is too unbalanced";
+                    return "Unable to distribute containers";
                 }
             }
             else
             {
-                return "Ship is too small";
+                return "Unable to distribute containers";
             }
 
             return "Success";
             
         }
 
-        private void DistrubuteContainers()
+        private bool DistrubuteContainers()
         {
             ResetData();
             int weightSum = GetWeightSum();
@@ -108,17 +121,18 @@ namespace Containervervoer
                         {
                             amountOfContainersSorted++;
                         }
-                        
                     }
                 }
             }
+
+            return true;
         }
 
         private bool TryToAddContainerCenter(Container container)
         {
             for (int x = 0; x < RowList.Count; x++)
             {
-                if (RowList[x].ReturnSide() == 2)
+                if ((int)RowList[x].Side == 2)
                 {
                     if (RowList[x].TryToAddContainer(container))
                     {
@@ -139,7 +153,7 @@ namespace Containervervoer
             {
                 if(WeightLeft <= WeightRight)
                 {
-                    if(RowList[x].ReturnSide() == 1)
+                    if((int)RowList[x].Side == 1)
                     {
                         if (RowList[x].TryToAddContainer(container))
                         {
@@ -151,7 +165,7 @@ namespace Containervervoer
                 }
                 else if (WeightLeft >= WeightRight)
                 {
-                    if (RowList[x].ReturnSide() == 3)
+                    if ((int)RowList[x].Side == 3)
                     {
                         if (RowList[x].TryToAddContainer(container))
                         {
@@ -166,7 +180,7 @@ namespace Containervervoer
             return false;
         }      
 
-        public void OpenContainerVisualizer()
+        private void OpenContainerVisualizer()
         {
             string stack = "";
             string weight = "";
@@ -194,7 +208,7 @@ namespace Containervervoer
                         Container container = RowList[z].stackListReadable[x].ContainerListReadable[y];
 
                         //Height
-                        stack += Convert.ToString(container.Type);
+                        stack += Convert.ToString((int)container.Type);
                         weight += Convert.ToString(container.Weight);
                         if(y < (RowList[z].stackListReadable[x].ContainerListReadable.Count - 1))
                         {
