@@ -65,9 +65,19 @@ namespace Containervervoer
         {
             int amountOfSlots = Length * Width * MaxHeight;
 
+            if (GetWeightSum() < MinWeigth)
+            {
+                return "Load doesn't have enough weight";
+            }
+
             if(ContainerList.Count > amountOfSlots)
             {
                 return "Ship is too small";
+            }
+
+            if (GetWeightSum() > MaxWeigth)
+            {
+                return "Load is too heavy";
             }
 
             if (DistrubuteContainers())
@@ -102,8 +112,7 @@ namespace Containervervoer
             ResetData();
             int weightSum = GetWeightSum();
             
-            //DEVELOPMENT TRUE == TRUE
-            if(weightSum >= MinWeigth && weightSum <= MaxWeigth || true == true)
+            if(weightSum >= MinWeigth && weightSum <= MaxWeigth)
             {
 
                 SortedContainerList = ContainerList.OrderByDescending(o => o.Type).ThenByDescending(o => o.Weight).ToList();
