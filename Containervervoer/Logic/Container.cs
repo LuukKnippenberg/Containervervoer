@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Containervervoer
 {
-    class Container
+    public class Container
     {
         public int Weight { get; private set; } //In Tons
         private int MaxWeight = 30;

@@ -1,0 +1,3 @@
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Logic\obj\Debug\netstandard2.0\Logic.AssemblyInfoInputs.cache
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Logic\obj\Debug\netstandard2.0\Logic.AssemblyInfo.cs
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Logic\obj\Debug\netstandard2.0\Logic.csproj.CoreCompileInputs.cache

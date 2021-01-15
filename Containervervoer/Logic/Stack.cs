@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Containervervoer
 {
-    class Stack
+    public class Stack
     {
         private List<Container> ContainerList = new List<Container>();
         public ReadOnlyCollection<Container> ContainerListReadable

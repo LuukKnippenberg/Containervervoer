@@ -12,7 +12,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Containervervoer
 {
-    class Ship
+    public class Ship
     {
         private List<Container> ContainerList = new List<Container>();
         public ReadOnlyCollection<Container> ContainerListRead
@@ -28,7 +28,7 @@ namespace Containervervoer
         public int Length { get; private set; }
         public int MaxWeigth { get; private set; }
         public int MinWeigth { get; private set; }
-        private int MaxHeight;
+        public int MaxHeight { get; private set; }
 
         private float WeightDifference;
         private int WeightLeft;

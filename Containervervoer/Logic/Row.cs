@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Containervervoer
 {
-    class Row
+    public class Row
     {
         private List<Stack> StackList = new List<Stack>();
         public ReadOnlyCollection<Stack> stackListReadable
@@ -25,7 +25,6 @@ namespace Containervervoer
             MaxHeight = maxHeight;
             StackList = InitializeStackList();
             Side = (RowSide)side;
-            
         }
 
         public enum RowSide
