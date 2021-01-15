@@ -63,6 +63,10 @@
       <Project>{7aad5b66-6aba-41c1-b71a-d06f9542b190}</Project>
       <Name>Containervervoer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{e1464c2e-8bc7-401b-a99a-4447f13f1dc8}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

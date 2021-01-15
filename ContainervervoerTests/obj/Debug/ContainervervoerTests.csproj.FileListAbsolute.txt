@@ -15,3 +15,5 @@ C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTes
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTests\obj\Debug\ContainervervoerTests.csproj.CopyComplete
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTests\obj\Debug\ContainervervoerTests.dll
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTests\obj\Debug\ContainervervoerTests.pdb
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTests\bin\Debug\Logic.dll
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\ContainervervoerTests\bin\Debug\Logic.pdb

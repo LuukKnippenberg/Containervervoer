@@ -18,3 +18,6 @@ C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\bi
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\obj\Debug\Containervervoer.csprojAssemblyReference.cache
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\obj\Debug\Containervervoer.exe
 C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\obj\Debug\Containervervoer.pdb
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\bin\Debug\Logic.dll
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\bin\Debug\Logic.pdb
+C:\Users\luuk_\source\repos\LuukKnippenberg\Containervervoer\Containervervoer\obj\Debug\Containervervoer.csproj.CopyComplete

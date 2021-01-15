@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic;
 
 namespace Containervervoer
 {
@@ -15,7 +16,7 @@ namespace Containervervoer
         Ship ship;
         //private List<string[]> tempContainers = new List<string[]>();
 
-        private List<Container> tempContainers = new List<Container>();
+        private List<Logic.Container> tempContainers = new List<Logic.Container>();
         public Form1()
         {
             InitializeComponent();
@@ -45,8 +46,8 @@ namespace Containervervoer
             }
 
             for (int i = 0; i < nupAmount.Value; i++)
-            {              
-                Container tempContainer = new Container(weight, valuable, coolable);
+            {
+                Logic.Container tempContainer = new Logic.Container(weight, valuable, coolable);
                 lbContainers.Items.Add(tempContainer.ReturnContainerInfoString());
                 tempContainers.Add(tempContainer);
             }
@@ -62,8 +63,6 @@ namespace Containervervoer
             }
 
             lblFeedback.Text = ship.AlgorithmHandler();
-            //ship.DistrubuteContainers();
-            //ship.OpenContainerVisualizer();
         }
 
         private void btnReset_Click(object sender, EventArgs e)

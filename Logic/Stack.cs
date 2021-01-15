@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Containervervoer.Logic
+namespace Logic
 {
-    class Stack
+    public class Stack
     {
         private List<Container> ContainerList = new List<Container>();
         public ReadOnlyCollection<Container> ContainerListReadable

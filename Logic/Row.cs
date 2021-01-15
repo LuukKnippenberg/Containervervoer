@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Containervervoer.Logic
+namespace Logic
 {
-    class Row
+    public class Row
     {
         private List<Stack> StackList = new List<Stack>();
         public ReadOnlyCollection<Stack> stackListReadable
@@ -25,7 +25,6 @@ namespace Containervervoer.Logic
             MaxHeight = maxHeight;
             StackList = InitializeStackList();
             Side = (RowSide)side;
-            
         }
 
         public enum RowSide

@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Drawing.Text;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
-namespace Containervervoer.Logic
+namespace Logic
 {
-    class Ship
+    public class Ship
     {
         private List<Container> ContainerList = new List<Container>();
         public ReadOnlyCollection<Container> ContainerListRead
@@ -28,7 +22,7 @@ namespace Containervervoer.Logic
         public int Length { get; private set; }
         public int MaxWeigth { get; private set; }
         public int MinWeigth { get; private set; }
-        private int MaxHeight;
+        public int MaxHeight { get; private set; }
 
         private float WeightDifference;
         private int WeightLeft;
@@ -307,9 +301,6 @@ namespace Containervervoer.Logic
             {
                 WeightDifference = WeightDifference * -1;
             }
-
-            Console.WriteLine($"Left: {WeightLeft} Center: {WeightCenter} Right: {WeightRight} - Weight Difference: {WeightDifference}");
-
         }
     }
 }
